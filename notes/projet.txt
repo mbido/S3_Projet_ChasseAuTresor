@@ -1,0 +1,64 @@
++-----------------------------------+
+|                            ^      |
+|  ######         $ #          B    |
+|                   #               |
+|   /         ###       ~           |
+|      #    ^                 #     |
+| A    #           "          #     |
+|      #      /         ~     #     |
+|      #                      #     |
+|                   #####           |
+|  7        ~                "      |
++-----------------------------------+
+
+
+A : hunter
+/ : ladder
+# : wall
+7 : pickaxe
+$ : treasure
+~ : quicksand
+^ : wise man
+" : cheater
+
+
+
+quand le hunter doit contourner un mur, le hunter retourne à ça position initiale
+
+
+																		  $
+																		 $$$
+																		$$$$$												      |-|
+[OwO]					[X_X] : oh no ! I'm dEaD now			[^v^] : the TRE	ASURE is mine now		[0o0] |-| : I find a LADDER		
+<[A]>            	|[A]|											\[A]/												<[A]-o|-|									
+ / \ hunter			 (	(											 / \												 / \  |-|									
+ 
+ [0o0]/|\ : I find a PICKAXE motherf***er		[#-#] : mais c'était sûr en fait
+ <[A]-o|												 ¬o-[A]|
+  / \														 | | 
+  
+      [OwO] : How can I go down now ?
+      <[A]|
+       / |
+   /-/[##]
+  /-/ [##]
+ /-/  [##]	
+/-/   [##]
+
+
+
+         [##]
+[*o*]/|\ : breaking the WALL
+ [A]=o|       
+ / /     [##]
+ 
+ 
+(-_-)							(-_-) : follow the conduit hunter
+|(^)\|						|(^)-o___
+ | | | the wise man		 | |
+ 
+ 
+
+ {*-*}				{*-*}
+ /{"}/				/{"}-o : trust me ! go this way BRO !
+  | \ cheater		 < \
