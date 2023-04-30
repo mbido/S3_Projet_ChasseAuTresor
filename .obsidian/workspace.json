@@ -1,0 +1,175 @@
+{
+  "main": {
+    "id": "b9434a16eab1a74e",
+    "type": "split",
+    "children": [
+      {
+        "id": "f9ddc40be6efddde",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "28159cdaf68c131d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projet.md.md",
+                "mode": "source",
+                "source": true
+              }
+            },
+            "group": "0af447392b71fe0b"
+          }
+        ]
+      },
+      {
+        "id": "c2b394bc7470b41a",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "41bd78a4ef620ea0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Projet.md.md",
+                "mode": "preview",
+                "source": false
+              }
+            },
+            "group": "0af447392b71fe0b"
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5d4ac4b136b5adbc",
+    "type": "split",
+    "children": [
+      {
+        "id": "a87e747fd803cbf5",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "48ea2f85a30fbabb",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "122571379cfa52b5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "409cde42fbb8268a",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "9c5f2943b589bbd5",
+    "type": "split",
+    "children": [
+      {
+        "id": "9caab0d609a07a70",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ce17f751cebd1f2",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Projet.md.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "c0cd3cd42445abfb",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Projet.md.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "76aff5c5e76107c1",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "2933c0823d679cce",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Projet.md.md"
+              }
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "canvas:Create new canvas": false
+    }
+  },
+  "active": "41bd78a4ef620ea0",
+  "lastOpenFiles": [
+    "2023-04-26.md",
+    "Projet.md.md"
+  ]
+}

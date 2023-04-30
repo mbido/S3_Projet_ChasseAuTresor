@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ChasseAuTresor:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ChasseAuTresor_jar</output-path>
+    <root id="archive" name="ChasseAuTresor.jar">
+      <element id="module-output" name="ChasseAuTresor" />
+    </root>
+  </artifact>
+</component>
