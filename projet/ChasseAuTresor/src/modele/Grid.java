@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class Grid {
     // We will be using LinkedLists, so we can access the first element and the last one in O(1)
     private static Map<Position, List<Occupant>> map = new HashMap<>();
-    private int width, height;
+    private final int width, height;
     public Grid(int height, int width) {
         this.width = width;
         this.height = height;

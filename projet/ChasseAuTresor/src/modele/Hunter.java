@@ -13,10 +13,8 @@ public class Hunter extends Player {
 
     @Override
     public void process(Moveable m) {
-        int dir = m.getDirection();
-        // setting the direction to random value different to the current one
-        while (dir == m.getDirection()) {
-            m.setDirection(new Random().nextInt(8));
-        }
+        m.setDirection(new Random().nextInt(8));
+        //sysout new dir
+        System.out.println("New direction of "+ toString() +": " + m.getDirection());
     }
 }
