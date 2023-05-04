@@ -13,6 +13,20 @@ public class Hunter extends Player {
         super(name, position);
         
     }
+    public boolean HavePickaxe() {
+        return pickaxe;
+    }
+    public void setPickaxe(boolean pickaxe) {
+        this.pickaxe = pickaxe;
+    }
+
+    public boolean HaveLadder() {
+        return ladder;
+    }
+
+    public void setLadder(boolean ladder) {
+        this.ladder = ladder;
+    }
 
     @Override
     public void process(Moveable m) {

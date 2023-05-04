@@ -2,6 +2,8 @@ package modele.occupant_no_moveable;
 
 import modele.Moveable;
 import modele.Position;
+import modele.Hunter;
+import modele.Player;
 
 public class Pickaxe extends Tool{
     private boolean usability = true;
@@ -24,7 +26,10 @@ public class Pickaxe extends Tool{
 
     @Override
     public void process(Moveable m) {
-        // TODO Auto-generated method stub
+        Player p = (Player) m;
+        Hunter h = (Hunter) p;
+        h.setPickaxe(true);
+        setUsability(false);
         throw new UnsupportedOperationException("Unimplemented method 'process'");
     }
 }
