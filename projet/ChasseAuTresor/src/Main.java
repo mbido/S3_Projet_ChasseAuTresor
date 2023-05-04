@@ -22,8 +22,8 @@ public class Main {
         grid = new Grid();
         listMoveables = new ArrayList<>();
         // occupants
-        Hunter hunter = new Hunter('H', new Position(5, 15));
-        Hunter hunter2 = new Hunter('D', new Position(7, 20));
+        Hunter hunter = new Hunter('H', new Position(10, 30, 5, 2), 0);
+        Hunter hunter2 = new Hunter('D', new Position(10, 30, 5, 10), 4);
 
         // adding them to the list
         listMoveables.add(hunter);

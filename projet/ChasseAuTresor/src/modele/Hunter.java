@@ -10,9 +10,6 @@ public class Hunter extends Player {
     public Hunter(char name, Position position) {
         super(name, position);
     }
-    public Hunter(char name) {
-        super(name);
-    }
 
     @Override
     public void process(Moveable m) {

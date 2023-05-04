@@ -8,9 +8,6 @@ public abstract class Occupant implements Questionnable{
     public Occupant(Position position) {
         this.position = position;
     }
-    public Occupant() {
-        this(new Position());
-    }
     public Position getPosition() {
         return position;
     }

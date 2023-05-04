@@ -8,14 +8,10 @@ public abstract class Player extends Occupant implements Moveable {
         super(position);
         this.direction = direction;
         this.name = name;
+        this.waitingTime = 0;
     }
     public Player(char name, Position position) {
         this(name, position, new Random().nextInt(8));
-        this.waitingTime = 0;
-    }
-    public Player(char name) {
-        this(name, new Position(), new Random().nextInt(8));
-        this.waitingTime = 0;
     }
     @Override
     public int getDirection() {
@@ -27,9 +23,13 @@ public abstract class Player extends Occupant implements Moveable {
     }
     @Override
     public Position getNextPosition() {
+        int row = getRow();
+        int col = getCol();
+        int MAX_ROW = getPosition().getMaxRow();
+        int MAX_COL = getPosition().getMaxCol();
         int[] rows = {0, -1, -1, -1, 0, 1, 1, 1};
         int[] cols = {1, 1, 0, -1, -1, -1, 0, 1};
-        return new Position(getRow() + rows[direction], getCol() + cols[direction]);
+        return new Position(MAX_ROW, MAX_COL, row + rows[direction], col + cols[direction]);
     }
     @Override
     public void setNextPosition(Position p) {

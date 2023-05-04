@@ -5,15 +5,17 @@ import java.util.Objects;
 
 
 public class Position {
-    private static final int MAX_ROW = 10, MAX_COL = 30;
+    private  int MAX_ROW = 10, MAX_COL = 30;
     private int row, col;
 
-    public Position(int row, int col) {
+    public Position(int MAX_ROW, int MAX_COL, int row, int col) {
         this.row = row;
         this.col = col;
+        this.MAX_COL = MAX_COL;
+        this.MAX_ROW = MAX_ROW;
     }
-    public Position() {
-        this(new Random().nextInt(MAX_ROW - 2) + 1, new Random().nextInt(MAX_COL - 2) + 1);
+    public Position(int MAX_ROW, int MAX_COL) {
+        this(new Random().nextInt(MAX_ROW - 2) + 1, new Random().nextInt(MAX_COL - 2) + 1, MAX_ROW, MAX_COL);
     }
     public int getMaxRow() {
         return MAX_ROW;

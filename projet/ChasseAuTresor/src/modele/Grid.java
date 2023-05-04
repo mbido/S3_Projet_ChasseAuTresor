@@ -1,5 +1,6 @@
 package modele;
 
+import javax.sql.ConnectionPoolDataSource;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
@@ -9,37 +10,37 @@ public class Grid {
     // We will be using LinkedLists, so we can access the first element and the last one in O(1)
     private static Map<Position, List<Occupant>> map = new HashMap<>();
     private int width, height;
-    public Grid(int width, int height) {
+    public Grid(int height, int width) {
         this.width = width;
         this.height = height;
         map = new HashMap<>();
         setMap();
     }
     public Grid() {
-        this(30, 10);
+        this(10, 30);
     }
     private void setMap() {
         // adding borders to the map
         for (int i = 0; i < width; i++) {
-            Position p = new Position(0, i);
+            Position p = new Position(height, width, 0, i);
             LinkedList<Occupant> rowTop = new LinkedList<>();
-            rowTop.add(new Border());
+            rowTop.add(new Border(new Position(height, width)));
             map.put(p, rowTop);
 
-            p = new Position(height - 1, i);
+            p = new Position(height, width, height - 1, i);
             LinkedList<Occupant> rowBottom = new LinkedList<>();
-            rowBottom.add(new Border());
+            rowBottom.add(new Border(new Position(height, width)));
             map.put(p, rowBottom);
         }
         for (int j = 0; j < height; j++) {
-            Position p = new Position(j, 0);
+            Position p = new Position(height, width, j, 0);
             LinkedList<Occupant> colLeft = new LinkedList<>();
-            colLeft.add(new Border());
+            colLeft.add(new Border(new Position(height, width)));
             map.put(p, colLeft);
 
-            p = new Position(j, width - 1);
+            p = new Position(height, width, j, width - 1);
             LinkedList<Occupant> colRight = new LinkedList<>();
-            colRight.add(new Border());
+            colRight.add(new Border(new Position(height, width)));
             map.put(p, colRight);
         }
     }
@@ -74,7 +75,7 @@ public class Grid {
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                Position p = new Position(i, j);
+                Position p = new Position(height, width, i, j);
 
                 if (map.containsKey(p)) {
                     res.append(((LinkedList<?>) map.get(p)).getLast());
