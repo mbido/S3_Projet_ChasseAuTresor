@@ -11,7 +11,11 @@ public class Main {
     static List<Moveable> listMoveables;
 
     private static void move(int i) {
-        Position pos = listMoveables.get(i).getNextPosition();
+        Player p = (Player) listMoveables.get(i);
+        if(p.getWaitingTime() != 0) {
+            p.setWaitingTime(p.getWaitingTime() - 1);
+        }
+        Position pos = p.getNextPosition();
         List<Occupant> occupants = grid.get(pos);
         if (occupants != null){
             // 3 cas :
@@ -54,7 +58,7 @@ public class Main {
         grid.add(hunter2.getPosition(), hunter2);
 
         System.out.println(grid);
-        for(int i = 0; i < 20; i++) {
+        for(int i = 0; i < 50; i++) {
             move(0);
             move(1);
             System.out.println(grid);

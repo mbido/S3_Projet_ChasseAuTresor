@@ -14,7 +14,5 @@ public class Hunter extends Player {
     @Override
     public void process(Moveable m) {
         m.setDirection(new Random().nextInt(8));
-        //sysout new dir
-        System.out.println("New direction of "+ toString() +": " + m.getDirection());
     }
 }
