@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="ChasseAuTresor">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/projet/ChasseAuTresor/out/artifacts/ChasseAuTresor_jar/ChasseAuTresor.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

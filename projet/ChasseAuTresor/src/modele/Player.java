@@ -1,6 +1,7 @@
 package modele;
 import java.util.Random;
 public abstract class Player extends Occupant implements Moveable {
+    private int waitingTime;
     private int direction;
     private final char name;
     public Player(char name, Position position, int direction) {
@@ -10,9 +11,11 @@ public abstract class Player extends Occupant implements Moveable {
     }
     public Player(char name, Position position) {
         this(name, position, new Random().nextInt(8));
+        this.waitingTime = 0;
     }
     public Player(char name) {
         this(name, new Position(), new Random().nextInt(8));
+        this.waitingTime = 0;
     }
     @Override
     public int getDirection() {
@@ -35,5 +38,13 @@ public abstract class Player extends Occupant implements Moveable {
     @Override
     public String toString() {
         return String.valueOf(name);
+    }
+
+    public int getWaitingTime() {
+        return waitingTime;
+    }
+
+    public void setWaitingTime(int time) {
+        waitingTime = time;
     }
 }

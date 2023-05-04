@@ -2,20 +2,16 @@ package modele;
 
 import java.util.Random;
 
-public class Hunter extends Player{
-    private int waitingTime;
+public class Hunter extends Player {
 
     public Hunter(char name, Position position, int direction) {
         super(name, position, direction);
-        this.waitingTime = 0;
     }
     public Hunter(char name, Position position) {
         super(name, position);
-        this.waitingTime = 0;
     }
     public Hunter(char name) {
         super(name);
-        this.waitingTime = 0;
     }
 
     @Override
