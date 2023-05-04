@@ -11,11 +11,35 @@ public class Main {
     static List<Moveable> listMoveables;
 
     private static void move(int i) {
-        Position pos = listMoveables.get(i).getNextPosition();
-        //TODO : verification validite
-        grid.remove(((Occupant) listMoveables.get(i)).getPosition(), (Occupant) listMoveables.get(i));
-        grid.add(pos, (Occupant) listMoveables.get(i));
-        listMoveables.get(i).setNextPosition(pos);
+        Player p = (Player) listMoveables.get(i);
+        if(p.getWaitingTime() != 0) {
+            p.setWaitingTime(p.getWaitingTime() - 1);
+        }
+        Position pos = p.getNextPosition();
+        List<Occupant> occupants = grid.get(pos);
+        if (occupants != null){
+            // 3 cas :
+            // 1 -> un seul element
+            if (occupants.size() == 1) {
+                occupants.get(0).process(listMoveables.get(i));
+            }else if(occupants.size() > 1) {
+                // si c'est une stone on process avec
+                // sinon on process le dernier element
+                if (occupants.get(occupants.size() - 1) instanceof Stone) {
+                    occupants.get(occupants.size() - 1).process(listMoveables.get(i));
+                } else {
+                    occupants.get(0).process(listMoveables.get(i));
+                }
+            }else{ // la liste est vide
+                grid.remove(((Occupant) listMoveables.get(i)).getPosition(), (Occupant) listMoveables.get(i));
+                grid.add(pos, (Occupant) listMoveables.get(i));
+                listMoveables.get(i).setNextPosition(pos);
+            }
+        }else {
+            grid.remove(((Occupant) listMoveables.get(i)).getPosition(), (Occupant) listMoveables.get(i));
+            grid.add(pos, (Occupant) listMoveables.get(i));
+            listMoveables.get(i).setNextPosition(pos);
+        }
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
@@ -23,7 +47,7 @@ public class Main {
         listMoveables = new ArrayList<>();
         // occupants
         Hunter hunter = new Hunter('H', new Position(10, 30, 5, 2), 0);
-        Hunter hunter2 = new Hunter('D', new Position(10, 30, 5, 10), 4);
+        Hunter hunter2 = new Hunter('D', new Position(10, 30, 5, 28), 4);
 
         // adding them to the list
         listMoveables.add(hunter);
@@ -34,11 +58,9 @@ public class Main {
         grid.add(hunter2.getPosition(), hunter2);
 
         System.out.println(grid);
-        for(int i = 0; i < 10; i++) {
+        for(int i = 0; i < 50; i++) {
             move(0);
             move(1);
-            System.out.println(((Occupant) listMoveables.get(0)).getPosition());
-            System.out.println(((Occupant) listMoveables.get(1)).getPosition());
             System.out.println(grid);
         }
     }
