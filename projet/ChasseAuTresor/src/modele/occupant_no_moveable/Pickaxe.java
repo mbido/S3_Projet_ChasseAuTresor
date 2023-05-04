@@ -30,6 +30,5 @@ public class Pickaxe extends Tool{
         Hunter h = (Hunter) p;
         h.setPickaxe(true);
         setUsability(false);
-        throw new UnsupportedOperationException("Unimplemented method 'process'");
     }
 }

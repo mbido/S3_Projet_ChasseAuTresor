@@ -2,6 +2,8 @@ package modele.occupant_no_moveable;
 
 import modele.Moveable;
 import modele.Position;
+import modele.Hunter;
+import modele.Player;
 
 public class Ladder extends Tool {
     private boolean usability = true;
@@ -21,7 +23,9 @@ public class Ladder extends Tool {
 
     @Override
     public void process(Moveable m) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'process'");
+        Player p = (Player) m;
+        Hunter h = (Hunter) p;
+        h.setLadder(true);
+        setUsability(false);
     }
 }
