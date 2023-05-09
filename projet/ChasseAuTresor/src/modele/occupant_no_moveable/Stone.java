@@ -2,7 +2,7 @@ package modele.occupant_no_moveable;
 
 import modele.Moveable;
 import modele.Occupant;
-import modele.Player;
+import modele.Character;
 import modele.Position;
 
 

@@ -1,20 +1,20 @@
-package modele.occupant_no_moveable;
+package modele;
 
-import modele.Moveable;
-import modele.Occupant;
-import modele.Character;
-import modele.Position;
+public class WiseMan extends Character {
+    private Position position; // position du sage
+    private int direction; // direction du sage
+    private final char symbole = '^'; // symbole du sage
+    private Position treasure; // position du trésor
 
 
-public class RoadMap extends Occupant{
-    public char symbole = '?';
-    public Position treasure;
 
-    public RoadMap(Position position, Position treasure) {
-        super(position);
+    public WiseMan(char name, Position position, Position treasure) {
+        super(name, position);
+        this.position = position;
         this.treasure = treasure;
 
     }
+
 
     // les direction possible
     // 4 3 2
@@ -59,11 +59,36 @@ public class RoadMap extends Occupant{
         return 0;
     }
 
+
+
+
+
+
     @Override
-    // redirige le joueur vers le trésor
     public void process(Moveable m) {
         Character p = (Character) m;
-        int direction = this.getDirectionToTreasure(this.treasure);
-        p.setDirection(direction);
+        Hunter h = (Hunter) p;
+        int direction = getDirectionToTreasure(this.treasure);
+        h.setDirection(direction);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public void setPosition(Position position) {
+        this.position = position;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+
+    public char getSymbole() {
+        return symbole;
     }
 }

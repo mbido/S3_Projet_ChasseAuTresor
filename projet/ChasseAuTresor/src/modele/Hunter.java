@@ -2,7 +2,7 @@ package modele;
 
 import java.util.Random;
 
-public class Hunter extends Player {
+public class Hunter extends Character {
     boolean pickaxe = false;
     boolean ladder = false;
 

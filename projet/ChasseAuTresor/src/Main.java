@@ -11,7 +11,7 @@ public class Main {
     static List<Moveable> listMoveables;
 
     private static void move(int i) {
-        Player p = (Player) listMoveables.get(i);
+        Character p = (Character) listMoveables.get(i);
         if(p.getWaitingTime() != 0) {
             p.setWaitingTime(p.getWaitingTime() - 1);
         }

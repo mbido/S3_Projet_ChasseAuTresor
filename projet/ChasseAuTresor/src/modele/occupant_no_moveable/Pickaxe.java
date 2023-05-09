@@ -3,7 +3,7 @@ package modele.occupant_no_moveable;
 import modele.Moveable;
 import modele.Position;
 import modele.Hunter;
-import modele.Player;
+import modele.Character;
 
 public class Pickaxe extends Tool{
     private boolean usability = true;
@@ -26,7 +26,7 @@ public class Pickaxe extends Tool{
 
     @Override
     public void process(Moveable m) {
-        Player p = (Player) m;
+        Character p = (Character) m;
         Hunter h = (Hunter) p;
         h.setPickaxe(true);
         setUsability(false);
