@@ -1,3 +1,3 @@
-# S3_Projet_ChasseAuTresor
+# S4_Projet_ChasseAuTresor
 
 ## Question :
