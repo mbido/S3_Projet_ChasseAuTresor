@@ -26,9 +26,13 @@ public class Pickaxe extends Tool{
 
     @Override
     public void process(Moveable m) {
-        Character p = (Character) m;
-        Hunter h = (Hunter) p;
-        h.setPickaxe(true);
-        setUsability(false);
+        if (m instanceof Hunter) {
+            Character p = (Character) m;
+            Hunter h = (Hunter) p;
+            if (this.usability == true) {
+                h.setPickaxe(true);
+                setUsability(false);
+            }
+        }
     }
 }

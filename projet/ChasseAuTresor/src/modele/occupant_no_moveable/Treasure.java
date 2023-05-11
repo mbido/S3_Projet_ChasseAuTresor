@@ -15,7 +15,7 @@ public class Treasure extends Occupant {
     @Override
     public void process(Moveable m) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'process'");
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

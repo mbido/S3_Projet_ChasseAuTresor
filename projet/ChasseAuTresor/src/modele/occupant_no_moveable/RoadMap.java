@@ -21,49 +21,51 @@ public class RoadMap extends Occupant{
     // 5 0 1
     // 6 7 8
     /**
-     * @param treasure
+     * @param treasure the position of the trasure row and col
      * @return la direction vers le trésor
      */
-    public int getDirectionToTreasure(Position treasure) {
-        int row = treasure.getRow();
-        int col = treasure.getCol();
-        int rowPlayer = this.getRow();
-        int colPlayer = this.getCol();
-        if (rowPlayer == row && colPlayer == col) {
-            return 0;
+    public int getBestDirectionToTreasure(Position treasure) {
+        int row = this.getRow();
+        int col = this.getCol();
+        int rowTreasure = treasure.getRow();
+        int colTreasure = treasure.getCol();
+        int direction = 0;
+        if (rowTreasure < row) {
+            if (colTreasure < col) {
+                direction = 4;
+            } else if (colTreasure > col) {
+                direction = 2;
+            } else {
+                direction = 3;
+            }
+        } else if (rowTreasure > row) {
+            if (colTreasure < col) {
+                direction = 6;
+            } else if (colTreasure > col) {
+                direction = 8;
+            } else {
+                direction = 7;
+            }
+        } else {
+            if (colTreasure < col) {
+                direction = 5;
+            } else if (colTreasure > col) {
+                direction = 1;
+            } else {
+                direction = 0;
+            }
         }
-        if (rowPlayer == row && colPlayer < col) {
-            return 1;
-        }
-        if (rowPlayer == row && colPlayer > col) {
-            return 5;
-        }
-        if (rowPlayer < row && colPlayer == col) {
-            return 3;
-        }
-        if (rowPlayer > row && colPlayer == col) {
-            return 7;
-        }
-        if (rowPlayer < row && colPlayer < col) {
-            return 2;
-        }
-        if (rowPlayer < row && colPlayer > col) {
-            return 4;
-        }
-        if (rowPlayer > row && colPlayer < col) {
-            return 8;
-        }
-        if (rowPlayer > row && colPlayer > col) {
-            return 6;
-        }
-        return 0;
+        return direction;
     }
+
+
+        
 
     @Override
     // redirige le joueur vers le trésor
     public void process(Moveable m) {
         Character p = (Character) m;
-        int direction = this.getDirectionToTreasure(this.treasure);
+        int direction = this.getBestDirectionToTreasure(this.treasure);
         p.setDirection(direction);
     }
 }

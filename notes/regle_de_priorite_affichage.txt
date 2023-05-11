@@ -1,0 +1,5 @@
+règle de priorité d'affichage :
+
+	1 - Wall
+	2 - Moveable
+	3 - Occupant
