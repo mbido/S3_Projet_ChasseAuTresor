@@ -1,4 +1,5 @@
 import modele.*;
+import modele.Character;
 
 import java.io.IOException;
 import java.util.*;
@@ -43,24 +44,24 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        grid = new Grid();
+        grid = new Grid(10, 30);
         listMoveables = new ArrayList<>();
         // occupants
-        Hunter hunter = new Hunter('H', new Position(10, 30, 5, 2), 0);
-        Hunter hunter2 = new Hunter('D', new Position(10, 30, 5, 28), 4);
+        Hunter hunter = new Hunter('H', new Position(10, 30, 5, 2), 1);
+        //Hunter hunter2 = new Hunter('D', new Position(10, 30, 5, 28), 4);
 
         // adding them to the list
         listMoveables.add(hunter);
-        listMoveables.add(hunter2);
+        //listMoveables.add(hunter2);
 
         // adding them to the grid
         grid.add(hunter.getPosition(), hunter);
-        grid.add(hunter2.getPosition(), hunter2);
+        //grid.add(hunter2.getPosition(), hunter2);
 
         System.out.println(grid);
         for(int i = 0; i < 50; i++) {
             move(0);
-            move(1);
+            //move(1);
             System.out.println(grid);
         }
     }

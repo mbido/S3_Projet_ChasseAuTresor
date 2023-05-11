@@ -47,6 +47,7 @@ public abstract class Character extends Occupant implements Moveable {
     @Override
     public String toString() {
         return String.valueOf(name);
+
     }
 
     public int getWaitingTime() {

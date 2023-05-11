@@ -24,23 +24,23 @@ public class Grid {
         for (int i = 0; i < width; i++) {
             Position p = new Position(height, width, 0, i);
             LinkedList<Occupant> rowTop = new LinkedList<>();
-            rowTop.add(new Border(new Position(height, width)));
+            rowTop.add(new Border(p));
             map.put(p, rowTop);
 
             p = new Position(height, width, height - 1, i);
             LinkedList<Occupant> rowBottom = new LinkedList<>();
-            rowBottom.add(new Border(new Position(height, width)));
+            rowBottom.add(new Border(p));
             map.put(p, rowBottom);
         }
         for (int j = 0; j < height; j++) {
             Position p = new Position(height, width, j, 0);
             LinkedList<Occupant> colLeft = new LinkedList<>();
-            colLeft.add(new Border(new Position(height, width)));
+            colLeft.add(new Border(p));
             map.put(p, colLeft);
 
             p = new Position(height, width, j, width - 1);
             LinkedList<Occupant> colRight = new LinkedList<>();
-            colRight.add(new Border(new Position(height, width)));
+            colRight.add(new Border(p));
             map.put(p, colRight);
         }
     }
