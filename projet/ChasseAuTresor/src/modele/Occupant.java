@@ -20,7 +20,7 @@ public abstract class Occupant implements Questionnable{
     protected void setPosition(Position position) {
         this.position = position;
     }
-    public abstract void process(Moveable m);
+    public abstract void process(Character m);
 
     @Override
     public boolean equals(Object other) {

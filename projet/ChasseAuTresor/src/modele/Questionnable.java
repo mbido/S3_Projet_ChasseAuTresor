@@ -1,5 +1,5 @@
 package modele;
 
 public interface Questionnable {
-    public void process(Moveable m);
+    public void process(Character m);
 }

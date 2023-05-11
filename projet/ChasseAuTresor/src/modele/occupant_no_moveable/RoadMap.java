@@ -3,6 +3,7 @@ package modele.occupant_no_moveable;
 import modele.Moveable;
 import modele.Occupant;
 import modele.Character;
+import modele.Hunter;
 import modele.Position;
 
 
@@ -64,8 +65,11 @@ public class RoadMap extends Occupant{
     @Override
     // redirige le joueur vers le trésor
     public void process(Moveable m) {
-        Character p = (Character) m;
-        int direction = this.getBestDirectionToTreasure(this.treasure);
-        p.setDirection(direction);
+        if (m instanceof Character) {
+            Character p = (Character) m;
+            Hunter h = (Hunter) p;
+            int direction = this.getBestDirectionToTreasure(this.treasure);
+           h.setDirection(direction);
+        }
     }
 }

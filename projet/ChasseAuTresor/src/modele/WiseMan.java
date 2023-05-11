@@ -24,39 +24,38 @@ public class WiseMan extends Character {
      * @param treasure
      * @return la direction vers le trésor
      */
-    public int getDirectionToTreasure(Position treasure) {
-        int row = treasure.getRow();
-        int col = treasure.getCol();
-        int rowPlayer = this.getRow();
-        int colPlayer = this.getCol();
-        if (rowPlayer == row && colPlayer == col) {
-            return 0;
+    public int getBestDirectionToTreasure(Position treasure) {
+        int row = this.getRow();
+        int col = this.getCol();
+        int rowTreasure = treasure.getRow();
+        int colTreasure = treasure.getCol();
+        int direction = 0;
+        if (rowTreasure < row) {
+            if (colTreasure < col) {
+                direction = 4;
+            } else if (colTreasure > col) {
+                direction = 2;
+            } else {
+                direction = 3;
+            }
+        } else if (rowTreasure > row) {
+            if (colTreasure < col) {
+                direction = 6;
+            } else if (colTreasure > col) {
+                direction = 8;
+            } else {
+                direction = 7;
+            }
+        } else {
+            if (colTreasure < col) {
+                direction = 5;
+            } else if (colTreasure > col) {
+                direction = 1;
+            } else {
+                direction = 0;
+            }
         }
-        if (rowPlayer == row && colPlayer < col) {
-            return 1;
-        }
-        if (rowPlayer == row && colPlayer > col) {
-            return 5;
-        }
-        if (rowPlayer < row && colPlayer == col) {
-            return 3;
-        }
-        if (rowPlayer > row && colPlayer == col) {
-            return 7;
-        }
-        if (rowPlayer < row && colPlayer < col) {
-            return 2;
-        }
-        if (rowPlayer < row && colPlayer > col) {
-            return 4;
-        }
-        if (rowPlayer > row && colPlayer < col) {
-            return 8;
-        }
-        if (rowPlayer > row && colPlayer > col) {
-            return 6;
-        }
-        return 0;
+        return direction;
     }
 
 
@@ -65,11 +64,11 @@ public class WiseMan extends Character {
 
 
     @Override
-    public void process(Moveable m) {
-        Character p = (Character) m;
-        Hunter h = (Hunter) p;
-        int direction = getDirectionToTreasure(this.treasure);
-        h.setDirection(direction);
+    public void process(Character m) {
+        if (m instanceof Hunter) {
+            int direction = getBestDirectionToTreasure(this.treasure);
+            m.setDirection(direction);
+        }
     }
 
     public Position getPosition() {

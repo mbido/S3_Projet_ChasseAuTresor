@@ -13,14 +13,14 @@ public class Hunter extends Character {
         super(name, position);
         
     }
-    public boolean HavePickaxe() {
+    public boolean getPickaxe() {
         return pickaxe;
     }
     public void setPickaxe(boolean pickaxe) {
         this.pickaxe = pickaxe;
     }
 
-    public boolean HaveLadder() {
+    public boolean getLadder() {
         return ladder;
     }
 
@@ -29,7 +29,7 @@ public class Hunter extends Character {
     }
 
     @Override
-    public void process(Moveable m) {
+    public void process(Character m) {
         m.setDirection(new Random().nextInt(8));
     }
 }

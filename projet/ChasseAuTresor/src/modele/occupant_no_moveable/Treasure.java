@@ -1,21 +1,38 @@
 package modele.occupant_no_moveable;
 
-import modele.Moveable;
 import modele.Occupant;
 import modele.Position;
+import modele.Character;
+import modele.Hunter;
 
 public class Treasure extends Occupant {
     public char symbole = '$';
+    private boolean win = false;
 
     public Treasure(Position position) {
         super(position);
-        //TODO Auto-generated constructor stub
+    }
+
+    public char getSymbole() {
+        return symbole;
+    }
+
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
     }
 
     @Override
-    public void process(Moveable m) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void process(Character m) {
+        if (m instanceof Hunter) {
+            Hunter h = (Hunter) m;
+            if (h.getLadder() == true && h.getPickaxe() == true) {
+                setWin(true);
+            }
+        }
     }
-    
+
 }

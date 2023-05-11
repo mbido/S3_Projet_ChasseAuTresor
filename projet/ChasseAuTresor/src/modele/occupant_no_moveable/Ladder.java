@@ -1,6 +1,5 @@
 package modele.occupant_no_moveable;
 
-import modele.Moveable;
 import modele.Position;
 import modele.Hunter;
 import modele.Character;
@@ -22,10 +21,13 @@ public class Ladder extends Tool {
     }
 
     @Override
-    public void process(Moveable m) {
-        Character p = (Character) m;
-        Hunter h = (Hunter) p;
-        h.setLadder(true);
-        setUsability(false);
+    public void process(Character m) {
+        if (m instanceof Hunter) {
+            Hunter h = (Hunter) m;
+            if (this.isUsable() == true && h.getLadder() == false) {
+                h.setLadder(true);
+                setUsability(false);
+            }
+        }
     }
 }
