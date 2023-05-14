@@ -5,11 +5,13 @@ import java.util.Random;
 public abstract class Character extends Occupant implements Moveable {
     private int waitingTime;
     private int direction;
+    private int tempDir;
     private final char name;
 
     public Character(char name, Position position, int direction) {
         super(position);
         this.direction = direction;
+        this.tempDir = -1;
         this.name = name;
         this.waitingTime = 0;
     }
@@ -36,7 +38,15 @@ public abstract class Character extends Occupant implements Moveable {
         int MAX_COL = getPosition().getMaxCol();
         int[] rows = { 0, -1, -1, -1, 0, 1, 1, 1 };
         int[] cols = { 1, 1, 0, -1, -1, -1, 0, 1 };
-        return new Position(MAX_ROW, MAX_COL, row + rows[direction], col + cols[direction]);
+
+        Position res;
+        if (tempDir != -1) {
+            res = new Position(MAX_ROW, MAX_COL, row + rows[tempDir], col + cols[tempDir]);
+            tempDir = -1;
+        }else{
+            res = new Position(MAX_ROW, MAX_COL, row + rows[direction], col + cols[direction]);
+        }
+        return res;
     }
 
     @Override
