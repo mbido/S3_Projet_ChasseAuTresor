@@ -5,16 +5,19 @@ import modele.Character;
 import modele.Position;
 
 public class Stone extends Occupant {
+    private Wall wall;
 
     public Stone(Position position) {
         super(position);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public void process(Character m) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Not supported yet.");
+        
+    }
+
+    public void setWall(Wall wall) {
+        this.wall = wall;
     }
 
     @Override

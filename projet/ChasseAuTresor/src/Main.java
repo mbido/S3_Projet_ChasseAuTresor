@@ -1,4 +1,5 @@
 import modele.*;
+import modele.occupant_no_moveable.*;
 import modele.Character;
 
 import java.io.IOException;
@@ -9,10 +10,10 @@ import java.util.*;
 
 public class Main {
     static Grid grid;
-    static List<Moveable> listMoveables;
+    static List<Character> listCharacter;
 
     private static void move(int i) {
-        Character p = (Character) listMoveables.get(i);
+        Character p = (Character) listCharacter.get(i);
         if(p.getWaitingTime() != 0) {
             p.setWaitingTime(p.getWaitingTime() - 1);
         }
@@ -22,36 +23,36 @@ public class Main {
             // 3 cas :
             // 1 -> un seul element
             if (occupants.size() == 1) {
-                occupants.get(0).process(listMoveables.get(i));
+                occupants.get(0).process(listCharacter.get(i));
             }else if(occupants.size() > 1) {
                 // si c'est une stone on process avec
                 // sinon on process le dernier element
                 if (occupants.get(occupants.size() - 1) instanceof Stone) {
-                    occupants.get(occupants.size() - 1).process(listMoveables.get(i));
+                    occupants.get(occupants.size() - 1).process(listCharacter.get(i));
                 } else {
-                    occupants.get(0).process(listMoveables.get(i));
+                    occupants.get(0).process(listCharacter.get(i));
                 }
             }else{ // la liste est vide
-                grid.remove(((Occupant) listMoveables.get(i)).getPosition(), (Occupant) listMoveables.get(i));
-                grid.add(pos, (Occupant) listMoveables.get(i));
-                listMoveables.get(i).setNextPosition(pos);
+                grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
+                grid.add(pos, (Occupant) listCharacter.get(i));
+                listCharacter.get(i).setNextPosition(pos);
             }
         }else {
-            grid.remove(((Occupant) listMoveables.get(i)).getPosition(), (Occupant) listMoveables.get(i));
-            grid.add(pos, (Occupant) listMoveables.get(i));
-            listMoveables.get(i).setNextPosition(pos);
+            grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
+            grid.add(pos, (Occupant) listCharacter.get(i));
+            listCharacter.get(i).setNextPosition(pos);
         }
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
         grid = new Grid(10, 30);
-        listMoveables = new ArrayList<>();
+        listCharacter = new ArrayList<>();
         // occupants
         Hunter hunter = new Hunter('H', new Position(10, 30, 5, 2), 1);
         //Hunter hunter2 = new Hunter('D', new Position(10, 30, 5, 28), 4);
 
         // adding them to the list
-        listMoveables.add(hunter);
+        listCharacter.add(hunter);
         //listMoveables.add(hunter2);
 
         // adding them to the grid
