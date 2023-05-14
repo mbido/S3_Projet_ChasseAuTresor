@@ -15,26 +15,85 @@ public class Stone extends Occupant {
     public void process(Character m) {
         Position firstWallPos = wall.getFirst().getPosition();
         Position lastWallPos = wall.getLast().getPosition();
-        Position thisPosition = getPosition();
+        Position mPosition = m.getPosition();
 
-        boolean isFirstClosest = firstWallPos.distance(thisPosition) < lastWallPos.distance(thisPosition);
+        boolean isFirstClosest = firstWallPos.distance(mPosition) < lastWallPos.distance(mPosition);
+
+        boolean mGoingUp = m.getDirection() == 1 || m.getDirection() == 2 || m.getDirection() == 3;
+        boolean mGoingDown = m.getDirection() == 5 || m.getDirection() == 6 || m.getDirection() == 7;
+        boolean mGoingLeft = m.getDirection() == 3 || m.getDirection() == 4 || m.getDirection() == 5;
+        boolean mGoingRight = m.getDirection() == 1 || m.getDirection() == 0 || m.getDirection() == 7;
+
         if (wall.isVertical()) {
             if (isFirstClosest) {
-                // we go up
-                m.setTempDir(2);
+                if (firstWallPos.getRow() == mPosition.getRow()) {
+                    if (mGoingLeft) {
+                        m.setTempDir(3);
+                    } else {
+                        m.setTempDir(1);
+                    }
+                }else if (firstWallPos.getRow() < mPosition.getRow()) {
+                    if (mGoingLeft) {
+                        m.setTempDir(4);
+                    } else {
+                        m.setTempDir(0);
+                    }
+                }else{
+                    m.setTempDir(2);
+                }
             } else {
-                // we go down
-                m.setTempDir(6);
+                if (lastWallPos.getRow() == mPosition.getRow()) {
+                    if (mGoingLeft) {
+                        m.setTempDir(5);
+                    } else {
+                        m.setTempDir(7);
+                    }
+                }else if (lastWallPos.getRow() > mPosition.getRow()) {
+                    if (mGoingLeft) {
+                        m.setTempDir(4);
+                    } else {
+                        m.setTempDir(0);
+                    }
+                }else{
+                    m.setTempDir(6);
+                }
             }
         } else {
             if (isFirstClosest) {
-                // we go left
-                m.setTempDir(4);
+                if (firstWallPos.getCol() == mPosition.getCol()) {
+                    if (mGoingUp) {
+                        m.setTempDir(3);
+                    } else {
+                        m.setTempDir(5);
+                    }
+                }else if (firstWallPos.getCol() > mPosition.getCol()) {
+                    if (mGoingUp) {
+                        m.setTempDir(2);
+                    } else {
+                        m.setTempDir(6);
+                    }
+                }else{
+                    m.setTempDir(4);
+                }
             } else {
-                // we go right
-                m.setTempDir(0);
+                if (lastWallPos.getCol() == mPosition.getCol()) {
+                    if (mGoingUp) {
+                        m.setTempDir(1);
+                    } else {
+                        m.setTempDir(7);
+                    }
+                }else if (lastWallPos.getCol() < mPosition.getCol()) {
+                    if (mGoingUp) {
+                        m.setTempDir(2);
+                    } else {
+                        m.setTempDir(6);
+                    }
+                }else{
+                    m.setTempDir(0);
+                }
             }
         }
+
     }
 
     public void setWall(Wall wall) {
