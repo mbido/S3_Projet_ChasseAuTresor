@@ -33,6 +33,10 @@ public class Position {
         return row < 0 || row >= MAX_ROW || col < 0 || col >= MAX_COL;
     }
 
+    public double distance(Position p) {
+        return Math.sqrt(Math.pow(row - p.row, 2) + Math.pow(col - p.col, 2));
+    }
+
     @Override
     public String toString() {
         return "[" + row + "][" + col + "]";

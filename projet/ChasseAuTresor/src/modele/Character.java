@@ -30,6 +30,10 @@ public abstract class Character extends Occupant implements Moveable {
         this.direction = direction;
     }
 
+    public void setTempDir(int tempDir) {
+        this.tempDir = tempDir;
+    }
+
     @Override
     public Position getNextPosition() {
         int row = getRow();
