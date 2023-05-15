@@ -3,8 +3,8 @@ package modele;
 import java.util.Random;
 
 public class Hunter extends Character {
-    boolean pickaxe = false;
-    boolean ladder = false;
+    private boolean pickaxe = false;
+    private boolean ladder = false;
 
     public Hunter(char name, Position position, int direction) {
         super(name, position, direction);

@@ -23,11 +23,23 @@ public class Main {
             // 3 cas :
             // 1 -> un seul element
             if (occupants.size() == 1) {
+                if(occupants.get(0) instanceof Stone && ((Stone) occupants.get(0)).isStoneBroken()){
+                    grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
+                    grid.add(pos, (Occupant) listCharacter.get(i));
+                    listCharacter.get(i).setNextPosition(pos);
+                    return;
+                }
                 occupants.get(0).process(listCharacter.get(i));
             }else if(occupants.size() > 1) {
                 // si c'est une stone on process avec
                 // sinon on process le dernier element
                 if (occupants.get(occupants.size() - 1) instanceof Stone) {
+                    if(((Stone) occupants.get(0)).isStoneBroken()){
+                        grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
+                        grid.add(pos, (Occupant) listCharacter.get(i));
+                        listCharacter.get(i).setNextPosition(pos);
+                        return;
+                    }
                     occupants.get(occupants.size() - 1).process(listCharacter.get(i));
                 } else {
                     occupants.get(0).process(listCharacter.get(i));
@@ -45,19 +57,21 @@ public class Main {
     }
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        grid = new Grid(10, 30);
+        final int MAX_ROW = 10;
+        final int MAX_COL = 30;
+        grid = new Grid(MAX_ROW, MAX_COL);
         listCharacter = new ArrayList<>();
         // occupants
         // - Characters
-        Hunter hunter = new Hunter('H', new Position(10, 30, 5, 2), 1);
+        Hunter hunter = new Hunter('H', new Position(MAX_ROW, MAX_COL, 5, 2), 1);
 
         // - Mur
         Wall wall = new Wall();
-        Stone stone0 = new Stone(new Position(10, 30, 3, 2));
-        Stone stone1 = new Stone(new Position(10, 30, 3, 3));
-        Stone stone2 = new Stone(new Position(10, 30, 3, 4));
-        Stone stone3 = new Stone(new Position(10, 30, 3, 5));
-        Stone stone4 = new Stone(new Position(10, 30, 3, 6));
+        Stone stone0 = new Stone(new Position(MAX_ROW, MAX_COL, 3, 2));
+        Stone stone1 = new Stone(new Position(MAX_ROW, MAX_COL, 3, 3));
+        Stone stone2 = new Stone(new Position(MAX_ROW, MAX_COL, 3, 4));
+        Stone stone3 = new Stone(new Position(MAX_ROW, MAX_COL, 3, 5));
+        Stone stone4 = new Stone(new Position(MAX_ROW, MAX_COL, 3, 6));
 
         wall.addStone(stone0);
         wall.addStone(stone1);

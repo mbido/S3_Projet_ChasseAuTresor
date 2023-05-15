@@ -1,5 +1,6 @@
 package modele.occupant_no_moveable;
 
+import modele.Hunter;
 import modele.Occupant;
 import modele.Character;
 import modele.Position;
@@ -7,12 +8,21 @@ import modele.Position;
 public class Stone extends Occupant {
     private Wall wall;
 
+    private int brokenTime;
+
     public Stone(Position position) {
         super(position);
+        this.brokenTime = 0;
     }
 
     @Override
     public void process(Character m) {
+        if (m instanceof Hunter && ((Hunter) m).getPickaxe()) {
+            this.brokenTime = 2;
+            ((Hunter)m).setPickaxe(false);
+            return;
+        }
+
         Position firstWallPos = wall.getFirst().getPosition();
         Position lastWallPos = wall.getLast().getPosition();
         Position mPosition = m.getPosition();
@@ -96,12 +106,18 @@ public class Stone extends Occupant {
 
     }
 
+    public boolean isStoneBroken(){return this.brokenTime > 0;}
+
     public void setWall(Wall wall) {
         this.wall = wall;
     }
 
     @Override
     public String toString() {
+        if(this.brokenTime > 0){
+            --brokenTime;
+            return " ";
+        }
         return "O";
     }
 
