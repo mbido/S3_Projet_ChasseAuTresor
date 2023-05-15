@@ -23,7 +23,17 @@ public class Main {
             // 3 cas :
             // 1 -> un seul element
             if (occupants.size() == 1) {
+                //si Stone cassee -> on l'ignore
                 if(occupants.get(0) instanceof Stone && ((Stone) occupants.get(0)).isStoneBroken()){
+                    grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
+                    grid.add(pos, (Occupant) listCharacter.get(i));
+                    listCharacter.get(i).setNextPosition(pos);
+                    return;
+                }
+                //si Stone et hunter avec echelle -> on monte dessus
+                if(occupants.get(0) instanceof Stone && p instanceof Hunter && ((Hunter)p).getLadder()){
+                    //on lui retire l'echelle
+                    ((Hunter)p).setLadder(false);
                     grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
                     grid.add(pos, (Occupant) listCharacter.get(i));
                     listCharacter.get(i).setNextPosition(pos);
@@ -31,16 +41,24 @@ public class Main {
                 }
                 occupants.get(0).process(listCharacter.get(i));
             }else if(occupants.size() > 1) {
-                // si c'est une stone on process avec
-                // sinon on process le dernier element
-                if (occupants.get(occupants.size() - 1) instanceof Stone) {
-                    if(((Stone) occupants.get(0)).isStoneBroken()){
-                        grid.remove(((Occupant) listCharacter.get(i)).getPosition(), (Occupant) listCharacter.get(i));
-                        grid.add(pos, (Occupant) listCharacter.get(i));
-                        listCharacter.get(i).setNextPosition(pos);
+                // ici on as donc plusieurs elements sur la meme case
+
+                // si le premier element est une stone on process avec
+                // sinon on process avec le dernier element
+                if (occupants.get(0) instanceof Stone) {
+                    // ici on ne prend pas en compte de l'echelle car on ne peut
+                    // pas monter car il y a un charactere dessus
+
+                    //si Stone cassee ou si l'element courrant est aussi sur une stone
+                    // -> on interagit avec ce qui est dessus
+                    if(((Stone) occupants.get(0)).isStoneBroken() || grid.get(p.getPosition()).get(0) instanceof Stone){
+                        occupants.get(occupants.size() - 1).process(listCharacter.get(i));
                         return;
                     }
-                    occupants.get(occupants.size() - 1).process(listCharacter.get(i));
+
+
+                    // sinon on process avec la stone
+                    occupants.get(0).process(listCharacter.get(i));
                 } else {
                     occupants.get(0).process(listCharacter.get(i));
                 }
