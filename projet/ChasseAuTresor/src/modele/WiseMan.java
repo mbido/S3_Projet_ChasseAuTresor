@@ -1,5 +1,16 @@
 package modele;
 
+import modele.Character;
+import modele.Hunter;
+import modele.Position;
+
+
+/**
+ * WiseMan
+ */
+
+
+
 public class WiseMan extends Character {
     private Position position; // position du sage
     private int direction; // direction du sage
