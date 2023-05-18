@@ -25,36 +25,35 @@ public class WiseMan extends Character {
      * @return the best direction to the treasure
      */
     public int getBestDirectionToTreasure(Position treasure) {
-        int row = this.getRow();
-        int col = this.getCol();
-        int rowTreasure = treasure.getRow();
-        int colTreasure = treasure.getCol();
-        int direction = -1;
-        if (rowTreasure < row) {
-            if (colTreasure < col) {
-                direction = 3;
-            } else if (colTreasure > col) {
-                direction = 1;
-            } else {
-                direction = 2;
-            }
-        } else if (rowTreasure > row) {
-            if (colTreasure < col) {
-                direction = 5;
-            } else if (colTreasure > col) {
-                direction = 7;
-            } else {
-                direction = 6;
-            }
-        } else {
-            if (colTreasure < col) {
-                direction = 4;
-            } else if (colTreasure > col) {
-                direction = 0;
-            }
+        Position vector = this.getPosition().getVector(treasure);
+        int rowVector = vector.getRow();
+        int colVector = vector.getCol();
+        double angle = Math.atan2(rowVector, colVector);
+
+        if (angle < 0) {
+            angle += 2 * Math.PI;
         }
-        return direction;
-    }
+
+
+        if (angle >= 0 && angle < Math.PI / 8) {
+            return 0;
+        } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
+            return 1;
+        } else if (angle >= 3 * Math.PI / 8 && angle < 5 * Math.PI / 8) {
+            return 2;
+        } else if (angle >= 5 * Math.PI / 8 && angle < 7 * Math.PI / 8) {
+            return 3;
+        } else if (angle >= 7 * Math.PI / 8 && angle < 9 * Math.PI / 8) {
+            return 4;
+        } else if (angle >= 9 * Math.PI / 8 && angle < 11 * Math.PI / 8) {
+            return 5;
+        } else if (angle >= 11 * Math.PI / 8 && angle < 13 * Math.PI / 8) {
+            return 6;
+        } else if (angle >= 13 * Math.PI / 8 && angle < 15 * Math.PI / 8) {
+            return 7;
+        } else {
+            return 0;
+        }
         
 
 
