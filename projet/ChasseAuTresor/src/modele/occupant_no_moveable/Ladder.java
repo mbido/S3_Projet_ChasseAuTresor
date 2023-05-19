@@ -5,29 +5,29 @@ import modele.Hunter;
 import modele.Character;
 
 public class Ladder extends Tool {
-    private boolean usability = true;
-    public char symbole = '/';
+    private boolean isUsable = true;
 
     public Ladder(Position position) {
         super(position);
     }
 
-    public boolean isUsable() {
-        return usability;
-    }
-
     public void setUsability(boolean usability) {
-        this.usability = usability;
+        this.isUsable = usability;
     }
 
     @Override
     public void process(Character m) {
         if (m instanceof Hunter) {
             Hunter h = (Hunter) m;
-            if (this.isUsable() == true && h.getLadder() == false) {
+            if (isUsable && !h.getLadder()) {
                 h.setLadder(true);
                 setUsability(false);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return (isUsable)? String.valueOf('/') : " ";
     }
 }

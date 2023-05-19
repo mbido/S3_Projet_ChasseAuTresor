@@ -5,10 +5,9 @@ import modele.Occupant;
 import modele.Position;
 
 public class Glue extends Occupant {
-    public char symbole = '~';
 
     public Glue(Position position) {
-        super(position);
+        super(position, true);
     }
 
     @Override
@@ -16,5 +15,8 @@ public class Glue extends Occupant {
         int waitTime = m.getWaitingTime();
         m.setWaitingTime(waitTime + 1);
     }
-
+    @Override
+    public String toString() {
+        return String.valueOf('~');
+    }
 }

@@ -6,15 +6,10 @@ import modele.Character;
 import modele.Hunter;
 
 public class Treasure extends Occupant {
-    public char symbole = '$';
     private boolean win = false;
 
     public Treasure(Position position) {
-        super(position);
-    }
-
-    public char getSymbole() {
-        return symbole;
+        super(position, true);
     }
 
     public boolean isWin() {
@@ -29,10 +24,14 @@ public class Treasure extends Occupant {
     public void process(Character m) {
         if (m instanceof Hunter) {
             Hunter h = (Hunter) m;
-            if (h.getLadder() == true && h.getPickaxe() == true) {
+            if (h.getLadder() && h.getPickaxe()) {
                 setWin(true);
             }
         }
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf('$');
+    }
 }

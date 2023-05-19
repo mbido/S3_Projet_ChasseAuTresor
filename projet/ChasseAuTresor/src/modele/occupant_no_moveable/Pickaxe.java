@@ -5,20 +5,14 @@ import modele.Hunter;
 import modele.Character;
 
 public class Pickaxe extends Tool {
-    private boolean usability = true;
-    // public char symbole = '⛏';
-    public char symbole = '7';
+    private boolean isUsable = true;
 
     public Pickaxe(Position position) {
         super(position);
     }
 
-    public boolean isUsable() {
-        return usability;
-    }
-
     public void setUsability(boolean usability) {
-        this.usability = usability;
+        this.isUsable = usability;
     }
 
     @Override
@@ -26,10 +20,15 @@ public class Pickaxe extends Tool {
         if (m instanceof Hunter) {
             Character p = (Character) m;
             Hunter h = (Hunter) p;
-            if (this.isUsable() == true && h.getPickaxe() == false) {
+            if (isUsable && !h.getPickaxe()) {
                 h.setPickaxe(true);
                 setUsability(false);
             }
         }
+    }
+
+    @Override
+    public String toString() {
+        return (isUsable)? String.valueOf('7') : " ";
     }
 }

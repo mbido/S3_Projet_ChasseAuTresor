@@ -19,6 +19,9 @@ public class Grid {
     public Grid() {
         this(10, 30);
     }
+    public List<Occupant> get(Position p) {
+        return map.getOrDefault(p, null);
+    }
     private void setMap() {
         // adding borders to the map
         for (int i = 0; i < width; i++) {
@@ -47,7 +50,7 @@ public class Grid {
 
     public void add(Position p, Occupant o) {
         if (map.containsKey(p)) {
-            map.get(p).add(o);
+            get(p).add(o);
         } else {
             LinkedList<Occupant> list = new LinkedList<>();
             list.add(o);
@@ -56,18 +59,15 @@ public class Grid {
     }
 
     public void remove(Position p, Occupant o) {
-        List<Occupant> occupants = map.get(p);
+        List<Occupant> occupants = get(p);
         if (occupants != null && occupants.contains(o)) {
             occupants.remove(o);
             if (occupants.isEmpty()) {
                 map.remove(p);
+            }else{
+                map.put(p, (LinkedList<Occupant>) occupants);
             }
-        }
-    }
-
-
-    public List<Occupant> get(Position p) {
-        return map.getOrDefault(p, null);
+        };
     }
 
     @Override

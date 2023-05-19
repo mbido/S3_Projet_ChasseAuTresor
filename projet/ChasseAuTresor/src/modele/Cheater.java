@@ -1,14 +1,16 @@
 package modele;
 
-public class WiseMan extends Character {
+
+
+public class Cheater extends Character {
     private Position position; // position du sage
     private int direction; // direction du sage
     private final Position treasure; // position du trésor
 
 
 
-    public WiseMan(Position position, Position treasure) {
-        super('^', position);
+    public Cheater(Position position, Position treasure) {
+        super('%', position);
         this.position = position;
         this.treasure = treasure;
 
@@ -23,7 +25,7 @@ public class WiseMan extends Character {
      * @param treasure the position of the trasure row and col
      * @return the best direction to the treasure
      */
-    public int getBestDirectionToTreasure(Position treasure, Position hunter) {
+    public int getWorstDirectionToTreasure(Position treasure, Position hunter) {
         int rowVector = treasure.getRow() - hunter.getRow();
         int colVector = treasure.getCol() - hunter.getCol();
         double angle = Math.atan2(rowVector, colVector);
@@ -55,14 +57,14 @@ public class WiseMan extends Character {
             }
         }
 
-        return res;
+        return (res + 3) % 8;
     }
 
 
     @Override
     public void process(Character m) {
         if (m instanceof Hunter) {
-            int direction = getBestDirectionToTreasure(this.treasure, m.getPosition());
+            int direction = getWorstDirectionToTreasure(this.treasure, m.getPosition());
             m.setDirection(direction);
         }
     }

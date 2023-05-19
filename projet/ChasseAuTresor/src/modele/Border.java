@@ -2,7 +2,7 @@ package modele;
 
 public class Border extends Occupant{
     public Border(Position position) {
-        super(position);
+        super(position, false);
     }
     public void process(Character m) {
         int dir = m.getDirection();

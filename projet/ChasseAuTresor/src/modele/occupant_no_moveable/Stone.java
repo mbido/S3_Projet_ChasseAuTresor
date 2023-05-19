@@ -11,7 +11,7 @@ public class Stone extends Occupant {
     private int brokenTime;
 
     public Stone(Position position) {
-        super(position);
+        super(position, false);
         this.brokenTime = 0;
     }
 

@@ -4,9 +4,12 @@ import java.util.Objects;
 
 public abstract class Occupant implements Questionnable{
     private Position position;
+    private final boolean isStepEnabled;
 
-    public Occupant(Position position) {
+    public Occupant(Position position, boolean isStepEnabled) {
+
         this.position = position;
+        this.isStepEnabled = isStepEnabled;
     }
     public Position getPosition() {
         return position;
@@ -22,12 +25,15 @@ public abstract class Occupant implements Questionnable{
     }
     public abstract void process(Character m);
 
+    public boolean isStepEnabled() {
+        return isStepEnabled;
+    }
+
     @Override
     public boolean equals(Object other) {
-        if (!(other instanceof Occupant)) {
-            return false;
-        }
-        Occupant o = (Occupant) other;
-        return Objects.equals(this.position, o.position);
+        return this == other;
     }
+
+    @Override
+    abstract public String toString();
 }

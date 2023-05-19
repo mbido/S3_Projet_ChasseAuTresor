@@ -9,7 +9,7 @@ public abstract class Character extends Occupant implements Moveable {
     private final char name;
 
     public Character(char name, Position position, int direction) {
-        super(position);
+        super(position, false);
         this.direction = direction;
         this.tempDir = -1;
         this.name = name;
@@ -61,7 +61,6 @@ public abstract class Character extends Occupant implements Moveable {
     @Override
     public String toString() {
         return String.valueOf(name);
-
     }
 
     public int getWaitingTime() {

@@ -6,7 +6,6 @@ import modele.Position;
 public abstract class Tool extends Occupant{
 
     public Tool(Position position) {
-        super(position);
-        
+        super(position, true);
     }
 }

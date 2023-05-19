@@ -55,4 +55,5 @@ public class Position {
         Position position = (Position) obj;
         return row == position.row && col == position.col;
     }
+
 }

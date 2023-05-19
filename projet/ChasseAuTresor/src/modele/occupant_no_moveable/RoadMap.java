@@ -8,11 +8,10 @@ import modele.Position;
 
 
 public class RoadMap extends Occupant{
-    public char symbole = '?';
     public Position treasure;
 
     public RoadMap(Position position, Position treasure) {
-        super(position);
+        super(position, true);
         this.treasure = treasure;
 
     }
@@ -25,48 +24,54 @@ public class RoadMap extends Occupant{
      * @param treasure the position of the trasure row and col
      * @return the best direction to the treasure
      */
-    public int getBestDirectionToTreasure(Position treasure) {
-        Position vector = this.getPosition().getVector(treasure);
-        int rowVector = vector.getRow();
-        int colVector = vector.getCol();
+    public int getBestDirectionToTreasure(Position treasure, Position hunter) {
+        int rowVector = treasure.getRow() - hunter.getRow();
+        int colVector = treasure.getCol() - hunter.getCol();
         double angle = Math.atan2(rowVector, colVector);
 
-        if (angle < 0) {
-            angle += 2 * Math.PI;
+        int res;
+        if (rowVector < 0){
+            if (angle >= -Math.PI / 2 && angle <  -3 * Math.PI / 8) {
+                res = 0;
+            } else if (angle >= -3 * Math.PI / 8 && angle < -Math.PI / 8) {
+                res = 1;
+            } else if (angle >= -Math.PI / 8 && angle < Math.PI / 8) {
+                res = 2;
+            } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
+                res = 3;
+            } else {
+                res = 4;
+            }
+        }else {
+            if (angle >= -Math.PI / 2 && angle <  -3 * Math.PI / 8) {
+                res = 4;
+            } else if (angle >= -3 * Math.PI / 8 && angle < -Math.PI / 8) {
+                res = 5;
+            } else if (angle >= -Math.PI / 8 && angle < Math.PI / 8) {
+                res = 6;
+            } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
+                res = 7;
+            } else {
+                res = 0;
+            }
         }
 
-
-        if (angle >= 0 && angle < Math.PI / 8) {
-            return 0;
-        } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
-            return 1;
-        } else if (angle >= 3 * Math.PI / 8 && angle < 5 * Math.PI / 8) {
-            return 2;
-        } else if (angle >= 5 * Math.PI / 8 && angle < 7 * Math.PI / 8) {
-            return 3;
-        } else if (angle >= 7 * Math.PI / 8 && angle < 9 * Math.PI / 8) {
-            return 4;
-        } else if (angle >= 9 * Math.PI / 8 && angle < 11 * Math.PI / 8) {
-            return 5;
-        } else if (angle >= 11 * Math.PI / 8 && angle < 13 * Math.PI / 8) {
-            return 6;
-        } else if (angle >= 13 * Math.PI / 8 && angle < 15 * Math.PI / 8) {
-            return 7;
-        } else {
-            return 0;
-        }
-
+        return res;
+    }
 
         
 
     @Override
     // redirige le joueur vers le trésor
     public void process(Character m) {
-        if (m instanceof Character) {
-            Character p = (Character) m;
-            Hunter h = (Hunter) p;
-            int direction = this.getBestDirectionToTreasure(this.treasure);
-           h.setDirection(direction);
+        if (m instanceof Hunter) {
+            int direction = this.getBestDirectionToTreasure(this.treasure, m.getPosition());
+            m.setDirection(direction);
         }
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf('?');
     }
 }
