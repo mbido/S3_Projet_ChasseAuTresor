@@ -6,7 +6,8 @@ import java.util.Objects;
 
 public class Position {
     private  int MAX_ROW = 10, MAX_COL = 30;
-    private int row, col;
+    private final int row;
+    private final int col;
 
     public Position(int MAX_ROW, int MAX_COL, int row, int col) {
         this.row = row;

@@ -35,4 +35,8 @@ public class Wall {
     public boolean isVertical(){
         return stones.getFirst().getPosition().getCol() == stones.getLast().getPosition().getCol();
     }
+
+    public int size() {
+        return stones.size();
+    }
 }

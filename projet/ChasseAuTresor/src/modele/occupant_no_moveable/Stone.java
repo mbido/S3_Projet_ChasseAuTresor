@@ -118,7 +118,7 @@ public class Stone extends Occupant {
             --brokenTime;
             return " ";
         }
-        return "O";
+        return "#";
     }
 
 }

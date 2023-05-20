@@ -70,6 +70,10 @@ public class Grid {
         };
     }
 
+    public void remove(Position p) {
+        map.remove(p);
+    }
+
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
