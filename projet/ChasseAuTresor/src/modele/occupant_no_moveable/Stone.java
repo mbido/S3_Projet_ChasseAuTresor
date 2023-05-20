@@ -25,14 +25,14 @@ public class Stone extends Occupant {
 
         Position firstWallPos = wall.getFirst().getPosition();
         Position lastWallPos = wall.getLast().getPosition();
+
+        // on donne la position de la premiere et de la derniere pierre + la taille du mur
         Position mPosition = m.getPosition();
 
         boolean isFirstClosest = firstWallPos.distance(mPosition) < lastWallPos.distance(mPosition);
 
         boolean mGoingUp = m.getDirection() == 1 || m.getDirection() == 2 || m.getDirection() == 3;
-        boolean mGoingDown = m.getDirection() == 5 || m.getDirection() == 6 || m.getDirection() == 7;
         boolean mGoingLeft = m.getDirection() == 3 || m.getDirection() == 4 || m.getDirection() == 5;
-        boolean mGoingRight = m.getDirection() == 1 || m.getDirection() == 0 || m.getDirection() == 7;
 
         if (wall.isVertical()) {
             if (isFirstClosest) {
@@ -42,7 +42,7 @@ public class Stone extends Occupant {
                     } else {
                         m.setTempDir(1);
                     }
-                }else if (firstWallPos.getRow() < mPosition.getRow()) {
+                }else if (firstWallPos.getRow() > mPosition.getRow()) {
                     if (mGoingLeft) {
                         m.setTempDir(4);
                     } else {
@@ -58,7 +58,7 @@ public class Stone extends Occupant {
                     } else {
                         m.setTempDir(7);
                     }
-                }else if (lastWallPos.getRow() > mPosition.getRow()) {
+                }else if (lastWallPos.getRow() < mPosition.getRow()) {
                     if (mGoingLeft) {
                         m.setTempDir(4);
                     } else {

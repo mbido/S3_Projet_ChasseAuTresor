@@ -25,6 +25,10 @@ public abstract class Character extends Occupant implements Moveable {
         return direction;
     }
 
+    public int getTempDir() {
+        return tempDir;
+    }
+
     @Override
     public void setDirection(int direction) {
         this.direction = direction;

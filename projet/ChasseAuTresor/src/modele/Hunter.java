@@ -11,7 +11,6 @@ public class Hunter extends Character {
     }
     public Hunter(char name, Position position) {
         super(name, position);
-        
     }
     public boolean getPickaxe() {
         return pickaxe;

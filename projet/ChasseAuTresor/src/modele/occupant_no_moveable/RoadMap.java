@@ -28,34 +28,24 @@ public class RoadMap extends Occupant{
         int rowVector = treasure.getRow() - hunter.getRow();
         int colVector = treasure.getCol() - hunter.getCol();
         double angle = Math.atan2(rowVector, colVector);
-
         int res;
-        if (rowVector < 0){
-            if (angle >= -Math.PI / 2 && angle <  -3 * Math.PI / 8) {
-                res = 0;
-            } else if (angle >= -3 * Math.PI / 8 && angle < -Math.PI / 8) {
-                res = 1;
-            } else if (angle >= -Math.PI / 8 && angle < Math.PI / 8) {
-                res = 2;
-            } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
-                res = 3;
-            } else {
-                res = 4;
-            }
-        }else {
-            if (angle >= -Math.PI / 2 && angle <  -3 * Math.PI / 8) {
-                res = 4;
-            } else if (angle >= -3 * Math.PI / 8 && angle < -Math.PI / 8) {
-                res = 5;
-            } else if (angle >= -Math.PI / 8 && angle < Math.PI / 8) {
-                res = 6;
-            } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
-                res = 7;
-            } else {
-                res = 0;
-            }
+        if (angle >= -Math.PI / 8 && angle < Math.PI / 8) {
+            res = 0;
+        } else if (angle >= Math.PI / 8 && angle < 3 * Math.PI / 8) {
+            res = 7;
+        } else if (angle >= 3 * Math.PI / 8 && angle < 5 * Math.PI / 8) {
+            res = 6;
+        } else if (angle >= 5 * Math.PI / 8 && angle < 7 * Math.PI / 8) {
+            res = 5;
+        } else if (angle <= -Math.PI / 8 && angle > -3 * Math.PI / 8) {
+            res = 1;
+        } else if (angle <= -3 * Math.PI / 8 && angle > -5 * Math.PI / 8) {
+            res = 2;
+        } else if (angle <= -5 * Math.PI / 8 && angle > -7 * Math.PI / 8) {
+            res = 3;
+        } else {
+            res = 4;
         }
-
         return res;
     }
 

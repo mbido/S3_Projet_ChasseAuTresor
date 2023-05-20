@@ -18,8 +18,7 @@ public class Pickaxe extends Tool {
     @Override
     public void process(Character m) {
         if (m instanceof Hunter) {
-            Character p = (Character) m;
-            Hunter h = (Hunter) p;
+            Hunter h = (Hunter) m;
             if (isUsable && !h.getPickaxe()) {
                 h.setPickaxe(true);
                 setUsability(false);
