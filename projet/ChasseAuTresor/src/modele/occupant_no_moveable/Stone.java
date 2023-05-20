@@ -5,16 +5,34 @@ import modele.Occupant;
 import modele.Character;
 import modele.Position;
 
+/**
+ * Stone class that makes up the walls
+ */
 public class Stone extends Occupant {
     private Wall wall;
 
     private int brokenTime;
 
+    /**
+     * Constructor of the class Stone
+     * A stone is cannot be walked on
+     *
+     * @param position the position of the stone
+     */
     public Stone(Position position) {
         super(position, false);
         this.brokenTime = 0;
     }
 
+    /**
+     * Process the interaction between a character and the stone
+     * It breaks the stone for a short period of time if the character
+     * has a pickaxe (only hunters can have a pickaxe)
+     * Otherwise, it will make the character go to the closest side of the wall
+     * using the tempDir attribute of the character
+     *
+     * @param m the character to interact with
+     */
     @Override
     public void process(Character m) {
         if (m instanceof Hunter && ((Hunter) m).getPickaxe()) {
@@ -106,12 +124,28 @@ public class Stone extends Occupant {
 
     }
 
+    /**
+     * Check if the stone is broken
+     *
+     * @return true if the stone is broken, false otherwise
+     */
     public boolean isStoneBroken(){return this.brokenTime > 0;}
 
+    /**
+     * Set the wall of the stone this function is called by the wall and only by the wall
+     *
+     * @param wall the wall to set
+     */
     public void setWall(Wall wall) {
         this.wall = wall;
     }
 
+    /**
+     * Return the string representation of the stone
+     * If the stone is broken, it will return " " for a short period of time and decrease the brokenTime attribute
+     *
+     * @return the string representation of the stone : "#" if the stone is not broken, " " otherwise
+     */
     @Override
     public String toString() {
         if(this.brokenTime > 0){

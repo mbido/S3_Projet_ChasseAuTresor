@@ -41,7 +41,7 @@ public class Jeu {
     }
 
     public Jeu(){
-        this(30, 100, 20, 5, 5, 5, 4, 4, 4, 5);
+        this(30, 100, 30, 5, 5, 5, 5, 5, 5, 5);
     }
 
     public void init() {

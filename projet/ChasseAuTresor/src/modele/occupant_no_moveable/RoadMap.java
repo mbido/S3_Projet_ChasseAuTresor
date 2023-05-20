@@ -6,25 +6,34 @@ import modele.Character;
 import modele.Hunter;
 import modele.Position;
 
-
+/**
+ * RoadMap is a class that represents the road map to the treasure
+ * it guides the hunter to the treasure by giving him the best direction to the treasure
+ */
 public class RoadMap extends Occupant{
     public Position treasure;
 
+    /** Creates a new instance of RoadMap
+     * A road map can be walked on
+     * A road map always knows the position of the treasure
+     *
+     * @param position the position of the road map
+     * @param treasure the position of the treasure
+     */
     public RoadMap(Position position, Position treasure) {
         super(position, true);
         this.treasure = treasure;
 
     }
 
-    // les direction possible
-    // 3 2 1
-    // 4 X 0
-    // 5 6 7
-    /**
-     * @param treasure the position of the trasure row and col
+
+    /** Get the best direction to the treasure. It is used
+     * in the process method for hunters to guide them to the treasure
+     *
+     * @param treasure the position of the treasure row and col
      * @return the best direction to the treasure
      */
-    public int getBestDirectionToTreasure(Position treasure, Position hunter) {
+    private int getBestDirectionToTreasure(Position treasure, Position hunter) {
         int rowVector = treasure.getRow() - hunter.getRow();
         int colVector = treasure.getCol() - hunter.getCol();
         double angle = Math.atan2(rowVector, colVector);
@@ -50,9 +59,12 @@ public class RoadMap extends Occupant{
     }
 
         
-
+    /** Process the hunter
+     * It changes the hunter's direction to the best direction to the treasure
+     *
+     * @param m the hunter
+     */
     @Override
-    // redirige le joueur vers le trésor
     public void process(Character m) {
         if (m instanceof Hunter) {
             int direction = this.getBestDirectionToTreasure(this.treasure, m.getPosition());
@@ -60,6 +72,10 @@ public class RoadMap extends Occupant{
         }
     }
 
+    /** Get the string representation of the road map
+     *
+     * @return the string representation of the road map : '?'
+     */
     @Override
     public String toString() {
         return String.valueOf('?');
