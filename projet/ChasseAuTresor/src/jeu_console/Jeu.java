@@ -18,8 +18,8 @@ public class Jeu {
     private final int width;
     private Position treasurePosition;
     private static List<Character> listCharacter;
-    private int round;
-    private boolean win;
+    // private int round;
+    // private boolean win;
     private final int nbHunter;
     private final int nbCheater;
     private final int nbWiseman;
@@ -69,6 +69,8 @@ public class Jeu {
 
     /**
      * Initialize the game by adding all the occupants randomly
+     * 
+     * @param nbTour the number of turns to play
      */
     public void init() {
         // Ajoute aléatoirement les murs.
@@ -132,6 +134,36 @@ public class Jeu {
             listCharacter.add(wiseman);
             grid.add(pos, wiseman);
         }
+
+        // affiche les règles du jeu :
+        System.out.println("Bienvenue dans le jeu de la chasse au tresor !");
+        System.out.println("Le but du jeu est de trouver le tresor avant les autres joueurs !");
+        System.out.println("Les joueurs sont les Hunter (A-Z)");
+        System.out.println("\nPour cela, vous pouvez utiliser les objets suivants :");
+        System.out.println(" - Les pickaxe (7) : permettent de casser les pierres.");
+        System.out.println(" - Les ladder (/) : permettent de monter sur les pierres.");
+        System.out.println(" - Les road map (?) : permettent de connaitre la position du tresor.");
+        System.out.println("\nIl y aura aussi des obstacles :");
+        System.out.println(" - Les glue (~) : permettent de bloquer un joueur pendant 3 tours.");
+        System.out.println(" - Les murs (#) : permettent de bloquer un joueur.");
+        System.out.println("\nD'autre personnage peuvent vous aider ou vous bloquer :");
+        System.out.println(" - Les sages (^) : vous indique la bonne direction vers le trésor.");
+        System.out.println(" - Les tricheurs (!) : vous indique une mauvaise direction vers le trésor.");
+        System.out.println("\nLes hunter trouverons t-il le trésor ?");
+        System.out.println("Bonne chance !\n");
+        System.out.println(grid);
+        System.out.print("Lancer la partie ? (y/n) :");
+        try (Scanner sc = new Scanner(System.in)) {
+            String str = sc.nextLine();
+            if(str.equals("n")){
+                System.exit(0);
+            }
+        }
+
+
+        
+
+        
     }
 
     /**
