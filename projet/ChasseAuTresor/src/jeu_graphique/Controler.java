@@ -3,12 +3,15 @@ package jeu_graphique;
 import modele.*;
 import modele.Character;
 import modele.occupant_no_moveable.*;
+
+import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
 
 public class Controler implements ActionListener{
 
@@ -30,10 +33,12 @@ public class Controler implements ActionListener{
     private final int nbGlue;
     private final int nbRoadMap;
 
+    private final int nbTours;
+
 
     private Fenetre fenetre;
 
-    public Controler(int height, int width, int nbWalls, int nbHunter, int nbCheater, int nbWiseman, int nbPickaxe, int nbLadder, int nbGlue, int nbRoadMap) {
+    public Controler(int height, int width, int nbWalls, int nbHunter, int nbCheater, int nbWiseman, int nbPickaxe, int nbLadder, int nbGlue, int nbRoadMap, int nbTours) throws IOException, InterruptedException {
         this.nbHunter = nbHunter;
         this.nbCheater = nbCheater;
         this.nbWiseman = nbWiseman;
@@ -46,20 +51,22 @@ public class Controler implements ActionListener{
         this.height = height;
         this.width = width;
         grid = new Grid(height, width);
+        this.nbTours = nbTours;
 
         this.fenetre = new Fenetre(height, width);
         this.fenetre.addEcouteur(this);
 
         init();
         afficherGrid();
+        play(nbTours);
     }
 
-    public Controler(int height, int width) {
-        this(height, width, 5, 0, 0, 0, 0, 0, 0, 0);
+    public Controler(int height, int width) throws IOException, InterruptedException {
+        this(height, width, 5, 0, 0, 0, 0, 0, 0, 0, 10);
     }
 
-    public Controler() {
-        this(15, 30, 5, 0, 0, 0, 0, 0, 0, 0);
+    public Controler() throws IOException, InterruptedException {
+        this(15, 30);
     }
 
     public void init() {
@@ -224,12 +231,13 @@ public class Controler implements ActionListener{
     }
 
     public void play(int nbTours) throws InterruptedException, IOException {
-        System.out.println(grid);
+        fenetre.activerNouvelle(false);
         for (int i = 0; i < nbTours; i++) {
             for (int j = 0; j < listCharacter.size(); j++) {
                 move(j);
             }
             afficherGrid();
+            //Thread.sleep(300);
 
             // stop the game if the treasure is found
             if (isFinished()) {
@@ -237,9 +245,11 @@ public class Controler implements ActionListener{
                 System.out.println("Le tresor a ete trouve !");
                 System.out.println("Le gagnant est " + winner);
                 System.out.println("Il a trouve le tresor en " + i + " tours");
+                fenetre.activerNouvelle(true);
                 return;
             }
         }
+        fenetre.activerNouvelle(true);
         System.out.println("Fin du jeu, le tresor n'a pas ete trouve");
     }
 
@@ -262,11 +272,45 @@ public class Controler implements ActionListener{
         return new Position(height, width, row, col);
     }
 
+
+    /**
+     * This method is used to initialize a new game. It is called when the "Nouvelle Partie" button is pressed in the GUI.
+     * The purpose of this method is to reset the game to its initial state, thus allowing players to start over with a clean board.
+     * <p>
+     * The function does this by first creating a new Grid and ArrayList for the characters, and then calling the 'init' method to initialize
+     * the game's elements (such as walls, treasure, pickaxe, ladder, glue, roadmap, characters, etc.) in random positions on the grid.
+     * <p>
+     * After initializing the game, it calls the 'afficherGrid' method to update and display the new game state in the GUI,
+     * and then calls the 'play' method to start the game logic for the specified number of turns (nbTours).
+     * <p>
+     * Any errors occurring during IO or threading operations are caught and handled by throwing a RuntimeException, ensuring
+     * that the program doesn't crash due to these exceptions.
+     *
+     */
     private void nouvellePartie() {
-        grid = new Grid(height, width);
-        init();
-        afficherGrid();
+        SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                grid = new Grid(height, width);
+                listCharacter = new ArrayList<>();
+                init();
+                afficherGrid();
+                play(nbTours);
+                return null;
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                } catch (InterruptedException | ExecutionException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        worker.execute();
     }
+
 
     private void afficherGrid(){
         for(int row = 0; row < height; ++row){
@@ -279,7 +323,6 @@ public class Controler implements ActionListener{
                     fenetre.setImageAt(row, col, "/asset/sets/grasse.png");
                 }
             }
-            System.out.println();
         }
         fenetre.update();
     }
@@ -287,13 +330,27 @@ public class Controler implements ActionListener{
     private void afficherOccupants(List<Occupant> occupants, int row, int col) {
         for (Occupant oc : occupants) {
             String path = "";
-            if (oc instanceof Stone && !((Stone)oc).isStoneBroken() || oc instanceof Border) {
-                path = "/asset/sets/stone.png";
+            if (oc instanceof Stone && Objects.equals(oc.toString(), "#") || oc instanceof Border) {
+                path = "/asset/final/stone/stone_20x20.png";
             } else if (oc instanceof Glue) {
-                path = "/asset/sets/glue.png";
+                path = "/asset/final/glue/glue_20x20.png";
+            } else if (oc instanceof Hunter) {
+                path = "/asset/final/grass/hunter/hunter_grass_down_blond_20x20.png";
+            } else if (oc instanceof RoadMap) {
+                path = "/asset/sets/roadmap.png";
+            } else if (oc instanceof Pickaxe && Objects.equals(oc.toString(), "7")) {
+                path = "/asset/sets/pickaxe.png";
+            } else if (oc instanceof WiseMan) {
+                path = "/asset/final/grass/wiseMan/wiseMan_grass_down_20x20.png";
+            } else if (oc instanceof Cheater) {
+                path = "/asset/sets/cheater.png";
+            } else if (oc instanceof Treasure) {
+                path = "/asset/sets/treasure.png";
+            } else if (oc instanceof Ladder && Objects.equals(((Ladder) oc).toString(), "/")){
+                path = "/asset/sets/lader.png";
             } else {
                 // cas par default :
-                path = "/asset/sets/grasse.png";
+                path = "/asset/final/grass/grass_20x20.png";
             }
             fenetre.setImageAt(row, col, path);
         }

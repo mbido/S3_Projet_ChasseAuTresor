@@ -96,6 +96,10 @@ public class Fenetre extends JFrame {
 
     }
 
+    public void activerNouvelle(Boolean activer) {
+        nouvellePartie.setEnabled(activer);
+    }
+
     public void update(){
         fenetre.revalidate();
         fenetre.repaint();
