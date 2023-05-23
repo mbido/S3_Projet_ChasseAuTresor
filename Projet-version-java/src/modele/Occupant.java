@@ -1,6 +1,6 @@
 package modele;
 
-import java.util.Objects;
+// import java.util.Objects;
 
 /**
  * An occupant is an object that can be placed on the grid

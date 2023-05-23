@@ -1,12 +1,10 @@
-import jeu_console.Jeu;
+import jeu_graphique.*;
 
 import java.io.IOException;
 
 public class Main {
-    private static Jeu jeu;
-    public static void main(String[] args) throws IOException, InterruptedException {
-        //jeu = new Jeu(10, 20, 10, 1, 0, 0, 0, 20, 0, 0);
-        jeu = new Jeu();
-        jeu.play(10000);
+    private static Controler controler;
+    public static void main(String[] args) throws IOException {
+        controler = new Controler(30, 50, 10, 10, 10, 10, 10, 10, 10, 10);
     }
 }

@@ -3,7 +3,7 @@ package modele.occupant_no_moveable;
 import modele.Occupant;
 import modele.Position;
 import modele.Character;
-import modele.Hunter;
+// import modele.Hunter;
 
 /**
  * Treasure is a class that represents the treasure in the game
