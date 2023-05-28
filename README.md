@@ -5,8 +5,8 @@
 >>items/tools
 >>hunter
 >>wiseman
->>cheater
+>>cheater<br>
 >glue
->>hunter
+>>hunter<br>
 >stone
 >>hunter
