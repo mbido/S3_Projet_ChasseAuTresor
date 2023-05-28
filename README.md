@@ -2,9 +2,9 @@
 
 ## Asset
 >grass
->>items/tools
->>hunter
->>wiseman
+>>items/tools<br>
+>>hunter<br>
+>>wiseman<br>
 >>cheater<br>
 
 
@@ -13,4 +13,4 @@
 
 
 >stone
->>hunter
+>>hunter<br>
