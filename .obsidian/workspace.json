@@ -13,9 +13,9 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projet.md.md",
-                "mode": "source",
-                "source": true
+                "file": "README.md",
+                "mode": "preview",
+                "source": false
               }
             },
             "group": "0af447392b71fe0b"
@@ -32,7 +32,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Projet.md.md",
+                "file": "README.md",
                 "mode": "preview",
                 "source": false
               }
@@ -84,6 +84,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "eb8e1fae2240e21f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -105,7 +113,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Projet.md.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -122,7 +130,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Projet.md.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -145,7 +153,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Projet.md.md"
+                "file": "README.md"
               }
             }
           }

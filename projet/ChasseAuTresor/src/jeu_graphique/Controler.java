@@ -237,7 +237,7 @@ public class Controler implements ActionListener{
                 move(j);
             }
             afficherGrid();
-            //Thread.sleep(300);
+            Thread.sleep(300);
 
             // stop the game if the treasure is found
             if (isFinished()) {
@@ -320,40 +320,93 @@ public class Controler implements ActionListener{
                 if(grid.get(pos) != null){
                     afficherOccupants(occupants, row, col);
                 }else{
-                    fenetre.setImageAt(row, col, "/asset/sets/grasse.png");
+                    fenetre.setImageAt(row, col, "/asset/final/grass/grass.png");
                 }
             }
         }
         fenetre.update();
     }
 
-    private void afficherOccupants(List<Occupant> occupants, int row, int col) {
-        for (Occupant oc : occupants) {
-            String path = "";
-            if (oc instanceof Stone && Objects.equals(oc.toString(), "#") || oc instanceof Border) {
-                path = "/asset/final/stone/stone_20x20.png";
-            } else if (oc instanceof Glue) {
-                path = "/asset/final/glue/glue_20x20.png";
-            } else if (oc instanceof Hunter) {
-                path = "/asset/final/grass/hunter/hunter_grass_down_blond_20x20.png";
-            } else if (oc instanceof RoadMap) {
-                path = "/asset/sets/roadmap.png";
-            } else if (oc instanceof Pickaxe && Objects.equals(oc.toString(), "7")) {
-                path = "/asset/sets/pickaxe.png";
-            } else if (oc instanceof WiseMan) {
-                path = "/asset/final/grass/wiseMan/wiseMan_grass_down_20x20.png";
-            } else if (oc instanceof Cheater) {
-                path = "/asset/sets/cheater.png";
-            } else if (oc instanceof Treasure) {
-                path = "/asset/sets/treasure.png";
-            } else if (oc instanceof Ladder && Objects.equals(((Ladder) oc).toString(), "/")){
-                path = "/asset/sets/lader.png";
-            } else {
-                // cas par default :
-                path = "/asset/final/grass/grass_20x20.png";
-            }
-            fenetre.setImageAt(row, col, path);
+    private String getDirectionLetter(int direction) {
+        switch (direction) {
+            case 1:
+            case 2:
+            case 3:
+                return "u";
+            case 4:
+            case 5:
+                return "l";
+            case 0:
+            case 7:
+                return "r";
+            default:
+                return "d";
         }
+    }
+    private String getColorLetter(String hunter){
+        char h = hunter.charAt(0);
+        int c = (h - 'A') % 4;
+        switch (c){
+            case 0:
+                return "b";
+            case 1:
+                return "g";
+            case 2:
+                return "r";
+            default:
+                return "y";
+        }
+    }
+
+    private void afficherOccupants(List<Occupant> occupants, int row, int col) {
+        String path = "/asset/final";
+        if(occupants.size() == 1){
+            Occupant occ = occupants.get(0);
+            if(occ instanceof Stone && !((Stone)occ).isStoneBroken() || occ instanceof Border) {
+                path += "/stone/stone.png";
+            }else if(Objects.equals(occ.toString(), " ")) {
+                path += "/grass/grass.png";
+            }else if(Objects.equals(occ.toString(), "~")) {
+                path += "/glue/glue.png";
+            }else if(Objects.equals(occ.toString(), "7")) {
+                path += "/grass/items/pickaxe.png";
+            }else if(Objects.equals(occ.toString(), "/")) {
+                path += "/grass/items/ladder.png";
+            }else if(Objects.equals(occ.toString(), "$")) {
+                path += "/grass/items/chest.png";
+            }else if(Objects.equals(occ.toString(), "?")) {
+                path += "/grass/items/roadmap.png";
+            }else if(occ instanceof Cheater) {
+                path += "/grass/cheater/c" + getDirectionLetter(((Cheater)occ).getDirection()) + ".png";
+            }else if(occ instanceof WiseMan) {
+                path += "/grass/wiseMan/w" + getDirectionLetter(((WiseMan)occ).getDirection()) + ".png";
+            }else if(occ instanceof Hunter) {
+                path += "/grass/hunter/h" + getColorLetter(occ.toString()) + getDirectionLetter(((Hunter)occ).getDirection()) + ".png";
+            }
+        }else if (occupants.size() > 1){
+            Occupant occ0 = occupants.get(0);
+            Occupant occ1 = occupants.get(1);
+            if(occ0 instanceof Stone && !((Stone)occ0).isStoneBroken() && occ1 instanceof Hunter) {
+                path += "/stone/hunter/h" + getColorLetter(occ1.toString()) + getDirectionLetter(((Hunter) occ1).getDirection()) + ".png";
+            }else if(occ0 instanceof Glue) {
+                if (occ1 instanceof Hunter) {
+                    path += "/glue/hunter/h" + getColorLetter(occ1.toString()) + getDirectionLetter(((Hunter) occ1).getDirection()) + ".png";
+                } else if (occ1 instanceof Cheater) {
+                    path += "/glue/cheater/c" + getDirectionLetter(((Cheater) occ1).getDirection()) + ".png";
+                } else if (occ1 instanceof WiseMan) {
+                    path += "/glue/wiseMan/w" + getDirectionLetter(((WiseMan) occ1).getDirection()) + ".png";
+                }
+            }else if(occ1 instanceof Hunter) {
+                path += "/grass/hunter/h" + getColorLetter(occ1.toString()) + getDirectionLetter(((Hunter) occ1).getDirection()) + ".png";
+            }else if(occ1 instanceof Cheater) {
+                path += "/grass/cheater/c" + getDirectionLetter(((Cheater) occ1).getDirection()) + ".png";
+            }else if(occ1 instanceof WiseMan) {
+                path += "/grass/wiseMan/w" + getDirectionLetter(((WiseMan) occ1).getDirection()) + ".png";
+            }
+        }else{
+            path += "/grass/grass.png";
+        }
+        fenetre.setImageAt(row, col, path);
     }
 
     public boolean isPosFree(Position pos) {
