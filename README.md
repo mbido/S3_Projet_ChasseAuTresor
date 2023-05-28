@@ -1,3 +1,12 @@
 # S4_Projet_ChasseAuTresor
 
-## Question :
+## Asset
+>grass
+>>items/tools
+>>hunter
+>>wiseman
+>>cheater
+>glue
+>>hunter
+>stone
+>>hunter
